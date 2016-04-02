@@ -11,3 +11,4 @@ foreach($stmt as $row) {
         ." <button name='id_book' value=".$row['id_book'].">X</button></li>";
 }
 echo "</ol></form>";
+
