@@ -2,7 +2,9 @@
 
 error_reporting(E_ALL);
 
-$conn = new PDO("mysql:host=localhost;dbname=adminmylife", "root", "") or die("fuck");
+require_once 'Classes/ConnectDB.php';
+$db = new ConnectDB();
+$conn = $db->getConnection();
 
 define('DIRSEP', DIRECTORY_SEPARATOR);
 
