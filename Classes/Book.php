@@ -56,4 +56,14 @@ class Book
     public function getEndDate() {
         return $this->end_date;
     }
+
+    public function getOutLine() {
+        if ($this->reading) {
+            $pages = '';
+        } else {
+            $pages = '<td>'.$this->reading_pages.'</td><td>'.$this->total_pages.'</td><td>'.$this->getPercentReading().'</td><td>'.
+                $this->getLeftReading().'</td>';
+        }
+        return '<td>'.$this->title.'</td><td>'.$this->writer.'</td>'.$pages;
+    }
 }
