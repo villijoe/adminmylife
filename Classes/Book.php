@@ -42,7 +42,7 @@ class Book
     }
 
     public function getPercentReading() {
-        return $this->reading_pages/$this->total_pages;
+        return (round($this->reading_pages/$this->total_pages*100, 2)).' %';
     }
 
     public function getLeftReading() {
@@ -57,12 +57,17 @@ class Book
         return $this->end_date;
     }
 
-    public function getOutLine() {
-        if ($this->reading) {
+    public function getRequireGet() {
+        return '&action=book/edit_book.php&title='.$this->getTitle().'&writer='.$this->getWriter().'&reading_pages='.$this->getReadingPages().'&total_pages='.
+        $this->getTotalPages();
+    }
+
+    public function getOutLine($mask) {
+        if ($this->reading || ($mask == 'all' || $mask == 'reading')) {
             $pages = '';
         } else {
             $pages = '<td>'.$this->reading_pages.'</td><td>'.$this->total_pages.'</td><td>'.$this->getPercentReading().'</td><td>'.
-                $this->getLeftReading().'</td>';
+                $this->getLeftReading().'</td><td class="edit"><a href="?route=books&books=add_book'.$this->getRequireGet().'"></a></td>';
         }
         return '<td>'.$this->title.'</td><td>'.$this->writer.'</td>'.$pages;
     }
