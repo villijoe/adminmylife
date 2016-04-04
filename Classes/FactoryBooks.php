@@ -3,15 +3,28 @@
 class FactoryBooks
 {
     private $db;
-    private $query = 'SELECT * FROM books WHERE reading = ?';
+    private $query;
     private $stmt;
     private $array_books = array();
+    private $mask;
+    private $base_table;
 
     public function __construct(ConnectDB $db, $mask) {
         $this->db = $db;
-        if ($mask == 'all') $this->query = 'SELECT * FROM books';
-        else if ($mask == 'reading') $this->query = 'SELECT * FROM books WHERE reading = TRUE';
-        else if ($mask == 'read') $this->query = 'SELECT * FROM books WHERE reading = FALSE';
+        $this->mask = $mask;
+        if ($this->mask == 'all') {
+            $this->query = 'SELECT * FROM books';
+            $this->base_table = '<thead><tr><td>#</td><td>Название</td><td>Автор</td></tr></thead>';
+        }
+        else if ($this->mask == 'reading') {
+            $this->query = 'SELECT * FROM books WHERE reading = TRUE';
+            $this->base_table = '<thead><tr><td>#</td><td>Название</td><td>Автор</td></tr></thead>';
+        }
+        else if ($this->mask == 'read') {
+            $this->query = 'SELECT * FROM books WHERE reading = FALSE';
+            $this->base_table = '<thead><tr><td>#</td><td>Название</td><td>Автор</td><td>Прочитано</td><td>Общее кол.стр.</td>'.
+                '<td>%</td><td>Осталось</td><td></td></tr></thead>';
+        }
         $this->getData();
     }
 
@@ -31,10 +44,11 @@ class FactoryBooks
     public function getOut() {
         echo '<table>';
         $i = 1;
+        echo $this->base_table.'<tbody>';
         foreach($this->getCollection() as $book) {
-            echo '<tr><td>'.$i.'</td>'.$book->getOutLine().'</tr>';
+            echo '<tr><td>'.$i.'</td>'.$book->getOutLine($this->mask).'</tr>';
             $i++;
         }
-        echo '</table>';
+        echo '</tbody></table>';
     }
 }

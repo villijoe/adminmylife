@@ -27,7 +27,7 @@ if (isset($_GET['books'])) {
         $factory = new FactoryBooks($db, $b);
         $factory->getOut();
     }
-    if ($b == 'add_book') { require_once "template/add_book_form.html"; }
+    if ($b == 'add_book') { require_once "template/add_book_form.php"; }
 } else {
     $factory = new FactoryBooks($db, 'all');
     $factory->getOut();
