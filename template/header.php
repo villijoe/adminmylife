@@ -11,5 +11,5 @@
     <a href="index.php?route=books">Books</a>
     <a href="index.php?route=deals">Deals</a>
     <a href="index.php?route=cook">Cook</a>
-    <a href="index.php?route=cook">Games</a>
+    <a href="index.php?route=games">Games</a>
 </div>

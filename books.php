@@ -2,8 +2,8 @@
 require_once "template/header.php";
 require_once "Classes/Book.php";
 require_once "Classes/FactoryBooks.php";
-$query_all = "SELECT * FROM books";
-$query_add = "INSERT INTO books(title) VALUES (?)";
+//$query_all = "SELECT * FROM books";
+//$query_add = "INSERT INTO books(title) VALUES (?)";
 ?>
 
 <a href="?route=books&books=all">Все</a>
