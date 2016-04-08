@@ -57,9 +57,17 @@ class Game
         return $this->end_date;
     }
 
+    public function getTotalDays() {
+        $datetime1 = new DateTime($this->getStartDate());
+        $datetime2 = ($this->getEndDate() == '0000-00-00') ? new DateTime("now") : $this->getEndDate();
+        $interval = $datetime2->diff($datetime1);
+        return $interval->format('%a days.<br />');
+
+    }
+
     public function getRequireGet() {
-        return '&action=book/edit_game.php&title='.$this->getTitle().'&writer='.$this->getCompany().'&reading_pages='.$this->getFinishedChapters()
-        .'&total_pages='.$this->getTotalChapters();
+        return '&action=game/edit_game.php&title='.$this->getTitle().'&company='.$this->getCompany().'&finished_chapters='.$this->getFinishedChapters()
+        .'&total_chapters='.$this->getTotalChapters().'&start_date='.$this->getStartDate().'&end_date='.$this->getEndDate();
     }
 
     public function getOutLine($mask) {
@@ -67,7 +75,8 @@ class Game
             $pages = '';
         } else {
             $pages = '<td>'.$this->finished_chapters.'</td><td>'.$this->total_chapters.'</td><td>'.$this->getPercentFinished().'</td><td>'.
-                $this->getLeftFinished().'</td><td class="edit"><a href="?route=games&books=add_game'.$this->getRequireGet().'"></a></td>';
+                $this->getLeftFinished().'</td><td>'.$this->getStartDate().'</td><td>'.$this->getEndDate()
+                .'</td><td>'.$this->getTotalDays().'</td><td class="edit"><a href="?route=games&games=add_game'.$this->getRequireGet().'"></a></td>';
         }
         return '<td>'.$this->title.'</td><td>'.$this->company.'</td>'.$pages;
     }

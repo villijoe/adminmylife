@@ -7,6 +7,8 @@ if (isset($_GET['title'])) {
     $total_chapters = $_GET['total_chapters'];
     $action = $_GET['action'];
     $old_title = $_GET['title'];
+    $start_date = $_GET['start_date'];
+    $end_date = $_GET['end_date'];
 } else {
     $title = '';
     $company = '';
@@ -14,8 +16,9 @@ if (isset($_GET['title'])) {
     $total_chapters = '';
     $action = 'game/add_game.php';
     $old_title = '';
+    $start_date = '';
+    $end_date = '';
 }
-
 ?>
 
 <form method="post" action="<?php echo $action; ?>">
@@ -28,6 +31,10 @@ if (isset($_GET['title'])) {
     <p>Total_chapters:</p>
     <input type="number" id="total_chapters" value="<?php echo $total_chapters; ?>" name="total_chapters" required />
     <input type="hidden" name="old_title" value="<?php echo $old_title; ?>" />
+    <p>Start Date:</p>
+    <input type="date" name="start_date" id="start_date" value="<?php echo $start_date; ?>" />
+    <p>End Date:</p>
+    <input type="date" name="end_date" id="end_date" value="<?php echo $end_date; ?>" />
     <p>Finished game: <input type="checkbox" name="finish" /> </p>
     <p><input type="submit" /></p>
 </form>
