@@ -23,7 +23,7 @@ class FactoryGames
         else if ($this->mask == 'process') {
             $this->query = 'SELECT * FROM games WHERE finished = FALSE';
             $this->base_table = '<thead><tr><td>#</td><td>Название</td><td>Компания</td><td>Пройдено</td><td>Общее кол.гл.</td>'.
-                '<td>%</td><td>Осталось</td><td></td></tr></thead>';
+                '<td>%</td><td>Осталось</td><td>Дата начала</td><td>Дата конца</td><td>Играю</td><td></td></tr></thead>';
         }
         $this->getData();
     }
