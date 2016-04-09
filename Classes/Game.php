@@ -59,6 +59,9 @@ class Game
 
     public function getTotalDays() {
         $datetime1 = new DateTime($this->getStartDate());
+        if ($this->getStartDate() == '0000-00-00') {
+            return '0 days.';
+        }
         $datetime2 = ($this->getEndDate() == '0000-00-00') ? new DateTime("now") : $this->getEndDate();
         $interval = $datetime2->diff($datetime1);
         return $interval->format('%a days.<br />');
