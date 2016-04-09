@@ -1,6 +1,12 @@
 <?php
 
-class FactoryBooks
+/**
+ * Created by PhpStorm.
+ * User: Orion
+ * Date: 09.04.2016
+ * Time: 12:11
+ */
+class FactoryCore
 {
     private $db;
     private $query;

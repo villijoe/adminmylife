@@ -57,17 +57,34 @@ class Book
         return $this->end_date;
     }
 
+    public function getTotalDays() {
+        $datetime1 = new DateTime($this->getStartDate());
+        if ($this->getStartDate() == '0000-00-00') {
+            return '0 days.';
+        }
+        $datetime2 = ($this->getEndDate() == '0000-00-00') ? new DateTime("now") : $this->getEndDate();
+        $interval = $datetime2->diff($datetime1);
+        return $interval->format('%a days.<br />');
+
+    }
+
     public function getRequireGet() {
         return '&action=book/edit_book.php&title='.$this->getTitle().'&writer='.$this->getWriter().'&reading_pages='.$this->getReadingPages().'&total_pages='.
-        $this->getTotalPages();
+        $this->getTotalPages().'&start_date='.$this->getStartDate().'&end_date='.$this->getEndDate();
     }
 
     public function getOutLine($mask) {
         if ($this->reading || ($mask == 'all' || $mask == 'reading')) {
             $pages = '';
         } else {
-            $pages = '<td>'.$this->reading_pages.'</td><td>'.$this->total_pages.'</td><td>'.$this->getPercentReading().'</td><td>'.
-                $this->getLeftReading().'</td><td class="edit"><a href="?route=books&books=add_book'.$this->getRequireGet().'"></a></td>';
+            $pages = '<td>'.$this->reading_pages.'</td>'
+                .'<td>'.$this->total_pages.'</td>'
+                .'<td>'.$this->getPercentReading().'</td>'
+                .'<td>'.$this->getLeftReading().'</td>'
+                .'<td>'.$this->getStartDate().'</td>'
+                .'<td>'.$this->getEndDate().'</td>'
+                .'<td>'.$this->getTotalDays().'</td>'
+                .'<td class="edit"><a href="?route=books&books=add_book'.$this->getRequireGet().'"></a></td>';
         }
         return '<td>'.$this->title.'</td><td>'.$this->writer.'</td>'.$pages;
     }
